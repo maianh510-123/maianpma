@@ -62,16 +62,6 @@ static void MX_GPIO_Init(void);
   * @retval int
   */
 
-void displayClock(int hour, int min, int sec){
-	  clearAllClock();
-	  int h = hour%12;
-	  int m = min/5;
-	  int s = sec/5;
-
-	  setNumberOnClock(h);
-	  setNumberOnClock(m);
-	  setNumberOnClock(s);
-  }
 
 int main(void)
 {
@@ -100,6 +90,16 @@ int main(void)
 			HAL_GPIO_WritePin(GPIOA, led[num], GPIO_PIN_RESET);
 		}
 
+	void displayClock(int hour, int min, int sec){
+		  clearAllClock();
+		  int h = hour%12;
+		  int m = min/5;
+		  int s = sec/5;
+
+		  setNumberOnClock(h);
+		  setNumberOnClock(m);
+		  setNumberOnClock(s);
+	  }
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -125,29 +125,29 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  
-AllClock();
-clearAllClock();
-setNumberOnClock(3);
-HAL_Delay(1000);
-clearNumberOnClock(3);
+
+//AllClock();
+//clearAllClock();
+//setNumberOnClock(3);
+//HAL_Delay(1000);
+//clearNumberOnClock(3);
 
 
-int hour = 0;
-    int minute = 0;
-    int second = 0;
+int hour = 1;
+    int minute = 15;
+    int second = 55;
   while (1)
   {
- 
+
 	  displayClock(hour, minute, second);
 
-	  HAL_Delay(1000); 
+	  HAL_Delay(1000);
 	  second++;
 	  if (second >= 60) { second = 0; minute++; }
 	  if (minute >= 60) { minute = 0; hour++; }
 	  if (hour >= 24)   { hour = 0; }
 }
-  displayClock(0,59,59);
+
 }
 /**
   * @brief System Clock Configuration
